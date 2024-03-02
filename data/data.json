@@ -1,0 +1,293 @@
+{
+   "name": "VASANTHAKUMAR",
+   "title": "SOFTWARE ENGINEER | CLOUD ARCHITECT | TECH ENTHUSIAST",
+   "about": "Hi, I'm an experienced software engineer skilled in various programming langauges and technologies like Python, Go, Rust, gRPC JavaScript, Web Application Development, DevOps, Cloud and Linux. I have Bachelors Degree in Computer Science Engineering. Interested in working on Revolutionary technologies and solving real-world problems through technology...",
+   "experience": [
+      {
+         "company": "Google",
+         "location": "Bangalore, IN",
+         "logo": "/assets/images/google.svg",
+         "company_url": "https://www.google.com/",
+         "positions": [
+            {
+               "title": "Cloud Engineer, Full Stack",
+               "duration": "December 2022 - Present",
+               "responsibilities": [
+                  "Developing technologies to accelerate the Google Cloud journey from legacy monolithic applications. Bring fresh ideas from all areas, including testing and validation automation while maintaining the production availability, conversion automation, distributed computing, and large-scale system design.",
+                  "Work with Google Cloud Platform strategic partners to accelerate the delivery.",
+                  "Design, develop, test, deploy, maintain, and improve software."
+               ]
+            },
+            {
+               "title": "Cloud Infrastructure Engineer, Google Cloud",
+               "duration": "December 2021 - December 2022",
+               "responsibilities": [
+                  "Working as a trusted technical advisor to customers and solve complex cloud infrastructure challenges in the areas of networking, containerization, and clustering.",
+                  "Create and deliver best practice recommendations, tutorials, blog articles, open-source and sample code, and technical presentations adapting to different levels of key business and technical stakeholders."
+               ]
+            }
+         ]
+      },
+      {
+         "company": "Amazon",
+         "location": "Chennai, IN",
+         "logo": "/assets/images/amazon.svg",
+         "company_url": "https://www.amazon.com/",
+         "positions": [
+            {
+               "title": "Application Engineer II",
+               "duration": "August 2021 - November 2021",
+               "responsibilities": [
+                  "Worked as an ApplicationEngineer for Kindle content org helping authors,publishers & readers to resolve the issues in Kindle content.",
+                  "Handle operations and maintenance driven projects, primarily in Java Python,Perl,shell scripts & web technologies and Software deployment support in staging and production environments."
+               ]
+            }
+         ]
+      },
+      {
+         "company": "CapeStart",
+         "location": "Nagercoil, IN",
+         "logo": "/assets/images/capestart.png",
+         "company_url": "https://www.capestart.com/",
+         "positions": [
+            {
+               "title": "DevOps Engineer",
+               "duration": "October 2020 - August 2021",
+               "responsibilities": [
+                  "Setting up Cloud Infrastructures on AWS,GCP,Azure etc.",
+                  "Setting up and maintaining CI/CD pipelines using tools like Jenkins,CircleCI, ArgoCD, Spinnaker etc",
+                  "Maintaining Infrastructures using monitoring tools like Pagerduty, Grafana, Prometheus, Apache airflow and Nagios etc"
+               ]
+            }
+         ]
+      }
+   ],
+   "skills": [
+      {
+         "title": "Python",
+         "category": "Programming",
+         "proficiency": "Expert",
+         "proficiency_level": 90,
+         "color": "text-blue-600",
+         "icon": "BiPython",
+         "url": "https://www.python.org/"
+      },
+      {
+         "title": "Go",
+         "category": "Programming",
+         "proficiency": "Intermediate",
+         "proficiency_level": 73,
+         "color": "text-green-500",
+         "icon": "BiGoLang",
+         "url": "https://go.dev/"
+      },
+      {
+         "title": "Rust",
+         "category": "Programming",
+         "proficiency": "Intermediate",
+         "proficiency_level": 45,
+         "color": "text-orange-500",
+         "icon": "BiRust",
+         "url": "https://www.rust-lang.org/"
+      },
+      {
+         "title": "C/C++",
+         "category": "Programming",
+         "proficiency": "Intermediate",
+         "proficiency_level": 70,
+         "color": "text-yellow-500",
+         "icon": "BiCplusplus",
+         "url": "https://isocpp.org/"
+      },
+      {
+         "title": "JavaScript",
+         "category": "Programming",
+         "proficiency": "Expert",
+         "proficiency_level": 90,
+         "color": "text-red-500",
+         "icon": "BiJavascript",
+         "url": "https://www.javascript.com/"
+      },
+      {
+         "title": "Java",
+         "category": "Programming",
+         "proficiency": "Intermediate",
+         "proficiency_level": 60,
+         "color": "text-purple-600",
+         "icon": "BiJava",
+         "url": "https://www.java.com/en/"
+      },
+      {
+         "title": "gRPC",
+         "category": "Programming",
+         "proficiency": "Intermediate",
+         "proficiency_level": 60,
+         "color": "grpc",
+         "icon": "BiServerRegular",
+         "url": "https://grpc.io/"
+      },
+      {
+         "title": "AWS",
+         "category": "DevOps & Cloud",
+         "proficiency": "Intermediate",
+         "proficiency_level": 75,
+         "color": "text-pink-500",
+         "icon": "BiAws",
+         "url": "https://aws.amazon.com/"
+      },
+      {
+         "title": "GCP",
+         "category": "DevOps & Cloud",
+         "proficiency": "Intermediate",
+         "proficiency_level": 85,
+         "color": "text-orange-500",
+         "icon": "BiGoogleCloud",
+         "url": "https://cloud.google.com/"
+      },
+      {
+         "title": "Azure",
+         "category": "DevOps & Cloud",
+         "proficiency": "Intermediate",
+         "proficiency_level": 75,
+         "color": "text-teal-500",
+         "icon": "BiMicrosoft",
+         "url": "https://azure.microsoft.com/en-us/"
+      },
+      {
+         "title": "Docker",
+         "category": "DevOps & Cloud",
+         "proficiency": "Intermediate",
+         "proficiency_level": 85,
+         "color": "text-blue-400",
+         "icon": "BiDocker",
+         "url": "https://www.docker.com/"
+      },
+      {
+         "title": "Kubernetes",
+         "category": "DevOps & Cloud",
+         "proficiency": "Intermediate",
+         "proficiency_level": 75,
+         "color": "text-green-400",
+         "icon": "BiKubernetes",
+         "url": "https://kubernetes.io/"
+      },
+      {
+         "title": "Terraform",
+         "category": "DevOps & Cloud",
+         "proficiency": "Intermediate",
+         "proficiency_level": 75,
+         "color": "text-yellow-400",
+         "icon": "SiTerraform",
+         "url": "https://www.terraform.io/"
+      },
+      {
+         "title": "Jenkins",
+         "category": "DevOps & Cloud",
+         "proficiency": "Intermediate",
+         "proficiency_level": 75,
+         "color": "text-red-400",
+         "icon": "SiJenkins",
+         "url": "https://www.jenkins.io/"
+      },
+      {
+         "title": "ShellScript",
+         "category": "Programming",
+         "proficiency": "Intermediate",
+         "proficiency_level": 75,
+         "color": "text-purple-400",
+         "icon": "BsTerminal",
+         "url": "https://www.gnu.org/software/bash/"
+      },
+      {
+         "title": "Linux",
+         "category": "OS & Databases",
+         "proficiency": "Intermediate",
+         "proficiency_level": 75,
+         "color": "text-indigo-400",
+         "icon": "SiLinux",
+         "url": "https://www.linux.org/"
+      },
+      {
+         "title": "MacOS",
+         "category": "OS & Databases",
+         "proficiency": "Intermediate",
+         "proficiency_level": 75,
+         "color": "text-pink-400",
+         "icon": "SiApple",
+         "url": "https://www.apple.com/macos/"
+      },
+      {
+         "title": "Windows",
+         "category": "OS & Databases",
+         "proficiency": "Intermediate",
+         "proficiency_level": 75,
+         "color": "text-orange-400",
+         "icon": "SiWindows",
+         "url": "https://www.microsoft.com/en-us/windows"
+      },
+      {
+         "title": "Neo4j",
+         "category": "OS & Databases",
+         "proficiency": "Intermediate",
+         "proficiency_level": 75,
+         "color": "text-teal-400",
+         "icon": "SiNeo4J",
+         "url": "https://neo4j.com/"
+      },
+      {
+         "title": "MySQL",
+         "category": "OS & Databases",
+         "proficiency": "Intermediate",
+         "proficiency_level": 75,
+         "color": "text-blue-300",
+         "icon": "SiMysql",
+         "url": "https://www.mysql.com/"
+      },
+      {
+         "title": "PostgreSQL",
+         "category": "OS & Databases",
+         "proficiency": "Intermediate",
+         "proficiency_level": 75,
+         "color": "text-green-300",
+         "icon": "SiPostgresql",
+         "url": "https://www.postgresql.org/"
+      }
+   ],
+   "certifications": [
+      {
+         "title": "Associate Cloud Engineer",
+         "provider": "Google Cloud",
+         "date": "May 2022",
+         "link": "https://www.credential.net/505ee7d0-9a8d-44c7-bd48-5501c0474318",
+         "badge": "https://api.accredible.com/v1/frontend/credential_website_embed_image/badge/50496814"
+      },
+      {
+         "title": "Professional Cloud Architect",
+         "provider": "Google Cloud",
+         "date": "May 2022",
+         "link": "https://www.credential.net/9879827e-1874-41c7-9719-6d6859c1720e",
+         "badge": "https://api.accredible.com/v1/frontend/credential_website_embed_image/badge/51314118"
+      },
+      {
+         "title": "Professional Cloud Developer",
+         "provider": "Google Cloud",
+         "date": "May 2022",
+         "link": "https://www.credential.net/8aef081c-8a5d-4f09-bbf4-dd798eb2eea9",
+         "badge": "https://api.accredible.com/v1/frontend/credential_website_embed_image/badge/50890882"
+      }
+   ],
+   "contacts": [
+      {
+         "contact_type": "gmail",
+         "link": "mailto:kvasanth373@gmail.com"
+      },
+      {
+         "contact_type": "github",
+         "link": "https://github.com/iamvasanth07"
+      },
+      {
+         "contact_type": "linkedin",
+         "link": "https://www.linkedin.com/in/iamvasanth07/"
+      }
+   ]
+}
