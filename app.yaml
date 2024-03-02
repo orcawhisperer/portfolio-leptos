@@ -1,0 +1,11 @@
+runtime: custom
+
+builders:
+   - name: gcr.io/cloud-builders/docker
+     args:
+        [
+           "build",
+           "-t",
+           "gcr.io/$PROJECT_ID/portfolio/portfolio-leptos:$IMAGE_TAG",
+           ".",
+        ]
