@@ -40,12 +40,6 @@ COPY --from=builder /app/data /app/data
 
 WORKDIR /app
 
-RUN cp site/pkg/portfolio.*.wasm site/pkg/portfolio.wasm
-
-RUN cp site/pkg/portfolio.*.css site/pkg/portfolio.css
-
-RUN cp site/pkg/portfolio.*.js site/pkg/portfolio.js
-
 # Set any required env variables and
 ENV RUST_LOG="info"
 ENV LEPTOS_SITE_ADDR="0.0.0.0:8080"
