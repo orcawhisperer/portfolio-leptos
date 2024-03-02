@@ -78,6 +78,8 @@ pub struct Data {
 pub async fn load_data() -> Result<Data, ServerFnError> {
     // TODO: Load from JSON
     logging::log!("loading data...");
+    // print current working directory
+
     let file = File::open("./data/data.json").unwrap();
     let data: Data = serde_json::from_reader(file).unwrap();
     Ok(data)
