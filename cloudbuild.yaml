@@ -7,6 +7,12 @@ steps:
            "us-central1-docker.pkg.dev/theta-carving-384614/portfolio/portfolio-leptos:$TAG_NAME",
            ".",
         ]
+   - name: "gcr.io/cloud-builders/docker"
+     args:
+        [
+           "push",
+           "us-central1-docker.pkg.dev/theta-carving-384614/portfolio/portfolio-leptos:$TAG_NAME",
+        ]
    - name: "gcr.io/cloud-builders/gcloud"
      args:
         [
