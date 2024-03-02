@@ -99,6 +99,21 @@ pub fn App() -> impl IntoView {
         // sets the document title
         <Title text="Vasanth's Portfolio"/>
 
+        <Meta name="description" content="Software Engineer Portfolio website build with Rust Leptos Framework"/>
+        <Meta name="keywords" content="software engineer, programming, python, go, javascript, web development, devops, linux, computer science, rust, leptos, portfolio"/>
+        <Meta name="author" content="Vasantha Kumar"/>
+        <Meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <Meta property="og:title" content="Vasantha Kumar - Software Engineer"/>
+        <Meta property="og:description" content="Software Engineer Portfolio website build with Rust Leptos Framework"/>
+        <Meta property="og:image" content="https://www.vasanthakumar.dev/assets/images/profile.jpg"/>
+        <Meta property="og:url" content="https://www.vasanthakumar.dev"/>
+        <Meta property="og:type" content="website"/>
+        <Meta name="twitter:card" content="summary_large_image"/>
+        <Meta name="twitter:title" content="Vasantha Kumar - Software Engineer"/>
+        <Meta name="twitter:description" content="Software Engineer Portfolio website build with Rust Leptos Framework"/>
+        <Meta name="twitter:image" content="https://www.vasanthakumar.dev/assets/images/profile.jpg"/>
+
+
         // content for this welcome page
         <Router>
             <NavBar/>

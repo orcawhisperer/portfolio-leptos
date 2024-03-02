@@ -1,0 +1,18 @@
+steps:
+   - name: "gcr.io/cloud-builders/docker"
+     args:
+        [
+           "build",
+           "-t",
+           "us-central1-docker.pkg.dev/theta-carving-384614/portfolio/portfolio-leptos:$TAG_NAME",
+           ".",
+        ]
+   - name: "gcr.io/cloud-builders/gcloud"
+     args:
+        [
+           "app",
+           "deploy",
+           "--image-url=us-central1-docker.pkg.dev/theta-carving-384614/portfolio/portfolio-leptos:$TAG_NAME",
+        ]
+options:
+   dynamicSubstitutions: true
