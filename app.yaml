@@ -1,11 +1,11 @@
-runtime: custom
+runtime: custom # E.g., python39, nodejs16, go119 (Choose the appropriate one)
+service: default # If you're deploying the 'default' service
+env: flex # Since you're likely using Cloud Build, the flexible environment is better suited
 
-builders:
-   - name: gcr.io/cloud-builders/docker
-     args:
-        [
-           "build",
-           "-t",
-           "gcr.io/$PROJECT_ID/portfolio/portfolio-leptos:$IMAGE_TAG",
-           ".",
-        ]
+# Optional (but good practice):
+instance_class: F2 # A basic instance class, adjust as needed
+automatic_scaling: # Example scaling configuration
+   min_num_instances: 1
+   max_num_instances: 5
+   cpu_utilization:
+      target_utilization: 0.7
