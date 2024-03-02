@@ -9,7 +9,7 @@ pub fn About(about_me_text: ReadSignal<String>) -> impl IntoView {
 
     create_effect(move |_| {
         logging::log!("show_terminal = {}", show_terminal());
-        logging::log!("about_me_text =  {}", about_me_text.get());
+        //   logging::log!("about_me_text =  {}", about_me_text.get());
     });
 
     view! {
@@ -62,7 +62,7 @@ pub fn About(about_me_text: ReadSignal<String>) -> impl IntoView {
               <div class="max-w-md mx-auto">
                  <img
                     priority
-                    class="w-3/4 h-auto shadow-lg transition rounded-full duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 cursor-pointer"
+                    class="w-3/4 h-auto shadow-md transition rounded-full duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 cursor-pointer"
                     src="/assets/images/profile.jpg"
                     alt="Vasantha Kumar"
                     width={500}

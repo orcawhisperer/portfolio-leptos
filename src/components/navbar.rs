@@ -15,7 +15,9 @@ pub fn NavBar() -> impl IntoView {
             <div class="container mx-auto px-6 py-3 ">
                 <div class="flex items-center justify-between">
                     <div class="text-2xl font-bold text-white font-montserrat">
-                        <a href="/"> {"HOME"} </a>
+                        <a href="/">
+                            <img src="/assets/images/vk.svg" class="w-20 transition rounded-full duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 cursor-pointer" />
+                        </a>
                     </div>
                     <div class="hidden md:block">
                         <ul class="flex items-center space-x-4">

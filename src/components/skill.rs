@@ -8,7 +8,7 @@ pub fn Skill(skills: ReadSignal<Vec<Skill>>) -> impl IntoView {
     // update about me text with live typing effect (debounced)
 
     let (active_category, set_active_category) = create_signal("Programming");
-    let (hovered_skill_index, set_hovered_skill_index) = create_signal(0);
+    let (hovered_skill_index, set_hovered_skill_index) = create_signal(128);
 
     let ref categories = ["Programming", "DevOps & Cloud", "OS & Databases"];
 
@@ -106,10 +106,8 @@ pub fn Skill(skills: ReadSignal<Vec<Skill>>) -> impl IntoView {
                         class="text-white font-semibold py-2 px-4 rounded font-montserrat mb-4"
                         class=("bg-gray-600", move || active_category.get() != *category)
                         class=("bg-gradient-to-br", move || active_category.get() == *category)
-                        class=("from-red-500", move || active_category.get() == *category)
-                        class=("via-yellow-500", move || active_category.get() == *category)
-                        class=("via-green-500", move || active_category.get() == *category)
-                        class=("to-blue-500", move || active_category.get() == *category)
+                        class=("from-blue-600", move || active_category.get() == *category)
+                        class=("to-purple-500", move || active_category.get() == *category)
                         on:click=move |_| set_active_category.update(|active_category: &mut &str| *active_category = category) >
                         {category.to_string()}
                     </button>

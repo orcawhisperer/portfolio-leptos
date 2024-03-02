@@ -44,9 +44,9 @@ pub fn WorkExperienceItem(key: usize, position: Position) -> impl IntoView {
 
 #[component]
 pub fn Experience(experiences: ReadSignal<Vec<Experience>>) -> impl IntoView {
-    create_effect(move |_| {
-        logging::log!("experiences = {:?}", experiences.get());
-    });
+    //  create_effect(move |_| {
+    //        logging::log!("experiences = {:?}", experiences.get());
+    //  });
     view! {
         <section id="experience" class="py-16 bg-gradient-to-r from-gray-800 via-gray-900 to-black">
          <h2 class="text-4xl font-bold mb-8 text-center text-white shadow-text font-montserrat">

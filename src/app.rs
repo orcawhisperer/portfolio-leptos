@@ -11,7 +11,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::components::{
     about::About, certifications::Certifications, contact::Contact, experience::Experience,
-    navbar::NavBar, skill::Skill,
+    hero::Hero, navbar::NavBar, skill::Skill,
 };
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
@@ -124,6 +124,8 @@ fn HomePage() -> impl IntoView {
         contacts: vec![],
     });
 
+    let (name, set_name) = create_signal(data().name);
+    let (title, set_title) = create_signal(data().title);
     let (about, set_about) = create_signal(data().about.clone());
     let (exp, set_exp) = create_signal(data().experience.clone());
     let (skills, set_skills) = create_signal(data().skills.clone());
@@ -143,7 +145,7 @@ fn HomePage() -> impl IntoView {
     // );
 
     create_effect(move |_| {
-        logging::log!("Data loaded: {}, Data: {:?}", data_loaded(), data().about);
+        logging::log!("Data loaded: {}", data_loaded());
 
         spawn_local(async move {
             logging::log!("Loading data...");
@@ -153,6 +155,8 @@ fn HomePage() -> impl IntoView {
                 if let Ok(data) = data_result {
                     set_data.update(|user_data: &mut Data| *user_data = data.clone());
                     set_data_loaded.update(|data_loaded: &mut bool| *data_loaded = true);
+                    set_name.update(|name: &mut String| *name = data.name.clone());
+                    set_title.update(|title: &mut String| *title = data.title.clone());
                     set_about.update(|about: &mut String| *about = data.about.clone());
                     set_exp.update(|exp: &mut Vec<Experience>| *exp = data.experience.clone());
                     set_skills.update(|skills: &mut Vec<Skill>| *skills = data.skills.clone());
@@ -168,7 +172,7 @@ fn HomePage() -> impl IntoView {
 
     view! {
         <main>
-
+            <Hero name=name title=title />
             <About about_me_text=about/>
             <Experience experiences=exp/>
             <Skill skills=skills/>
