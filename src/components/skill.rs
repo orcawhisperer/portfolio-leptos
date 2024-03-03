@@ -143,7 +143,6 @@ pub fn Skill(skills: ReadSignal<Vec<Skill>>) -> impl IntoView {
                                 }>
                             <div
                                 class="w-full h-full absolute left-0 top-0 bg-gradient-to-r from-blue-600 via-blue-500 to-purple-600 skill-bar"
-                                style="hover:"
                                 class=("slide-in", move || hovered_skill_index.get() == idx)
                                 style={format!("clip-path: polygon(0% 0%, 95% 0%, 100% 100%, 0% 100%); transform-origin: left; width: {}%; --skill-width: {}% ", skill.proficiency_level.clone(), skill.proficiency_level.clone())}
                             />

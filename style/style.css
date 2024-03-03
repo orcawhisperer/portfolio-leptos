@@ -47,3 +47,33 @@
      width: var(--skill-width, 100%);
    }
 }
+
+html {
+   scroll-behavior: smooth;
+}
+
+.terminal {
+   max-width: 800px;
+   height: 300px;
+   margin: 0 auto;
+   overflow-wrap: break-word;
+   font-size: 1rem;
+   line-height: 1.5;
+   color: #00ff00;
+ }
+
+ @keyframes cursor-blink {
+   0%,
+   50% {
+     opacity: 1;
+   }
+   51%,
+   100% {
+     opacity: 0;
+   }
+ }
+ 
+ .cursor-blink {
+   animation: cursor-blink 1s infinite;
+ }
+ 
