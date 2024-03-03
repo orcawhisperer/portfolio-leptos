@@ -20,7 +20,6 @@ pub fn WorkExperienceItem(key: usize, position: Position) -> impl IntoView {
            <span
               class="inline-block ml-2 transform transition-transform duration-300"
               class=("rotate-90", move || collapsed.get() == true)
-            //   class:rotate-90=move || !collapsed.get()
               >
 
               <Icon icon={i::BsChevronDown} class="text-white" />

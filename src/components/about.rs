@@ -63,8 +63,8 @@ pub fn About(about_me_text: ReadSignal<String>) -> impl IntoView {
                  <img
                     priority
                     class="w-3/4 h-auto shadow-md transition rounded-full duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 cursor-pointer"
-                    src="/assets/images/profile.jpg"
-                    alt="Vasantha Kumar"
+                    src="/assets/images/profile.webp"
+                    alt="Avatar"
                     width={500}
                     height={500}
                  />

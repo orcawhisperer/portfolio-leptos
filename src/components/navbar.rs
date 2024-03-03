@@ -20,7 +20,7 @@ pub fn NavBar() -> impl IntoView {
                 <div class="flex items-center justify-between">
                     <div class="text-2xl font-bold text-white font-montserrat">
                         <a href="/">
-                            <img src="/assets/images/vk.svg" class="w-20 transition rounded-full duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 cursor-pointer" />
+                            <img src="/assets/images/vk.svg" alt="VK" class="w-20 transition rounded-full duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 cursor-pointer" width=100 height=100 />
                         </a>
                     </div>
                     <div class="hidden md:block">
