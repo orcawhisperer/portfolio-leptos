@@ -1328,3 +1328,8 @@ video {
     width: var(--skill-width, 100%);
   }
 }
+
+
+html {
+  scroll-behavior: smooth;
+}
