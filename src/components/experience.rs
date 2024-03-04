@@ -2,7 +2,7 @@ use icondata as i;
 use leptos::*;
 use leptos_icons::*;
 
-use crate::app::{Experience, Position};
+use crate::model::user::{Experience, Position};
 
 // TODO: Load from JSON
 
@@ -13,9 +13,9 @@ pub fn WorkExperienceItem(key: usize, position: Position) -> impl IntoView {
     create_effect(move |_| logging::log!("collapsed = {}", collapsed.get()));
 
     view! {
-        <div key={key} class="border-l-4 border-blue-500 p-4 mb-6 transition-all duration-300 transform hover:scale-105 cursor-pointer"
-        on:click=move |_| setCollapsed.update(|collapsed: &mut bool| *collapsed = !*collapsed)>
-        <h4 class="text-xl font-semibold mb-2 text-white shadow-text font-montserrat">
+        <div key={key} class="border-l-4 border-blue-500 p-4 mb-6 transition-all duration-300 transform hover:scale-105 ease-in-out cursor-pointer"
+         on:click=move |_| setCollapsed.update(|collapsed: &mut bool| *collapsed = !*collapsed)>
+         <h4 class="text-xl font-semibold mb-2 text-white shadow-text font-montserrat">
            {position.title.to_string()}
            <span
               class="inline-block ml-2 transform transition-transform duration-300"
@@ -24,18 +24,18 @@ pub fn WorkExperienceItem(key: usize, position: Position) -> impl IntoView {
 
               <Icon icon={i::BsChevronDown} class="text-white" />
            </span>
-        </h4>
-        <p class="text-gray-300 mb-2 shadow-text font-montserrat">
+         </h4>
+         <p class="text-gray-300 mb-2 shadow-text font-montserrat">
            {position.duration.to_string()}
-        </p>
+         </p>
 
-        <Show when=move || collapsed.get()>
-            <ul class="list-disc pl-5 text-gray-300 shadow-text font-montserrat">
-                {position.responsibilities.iter().enumerate().map(|(index, responsibility)| view! {
-                    <li key={index}>{responsibility.to_string()}</li>
-                }).collect_view()}
-            </ul>
-        </Show>
+         <Show when=move || collapsed.get()>
+               <ul class="list-disc pl-5 text-gray-300 shadow-text font-montserrat">
+                  {position.responsibilities.iter().enumerate().map(|(index, responsibility)| view! {
+                     <li key={index}>{responsibility.to_string()}</li>
+                  }).collect_view()}
+               </ul>
+         </Show>
 
         </div>
     }

@@ -1,4 +1,4 @@
-use crate::app::Contact;
+use crate::model::user::Contact;
 use icondata as i;
 use leptos::*;
 use leptos_icons::*;

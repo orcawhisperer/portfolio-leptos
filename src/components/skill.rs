@@ -1,4 +1,4 @@
-use crate::app::Skill;
+use crate::model::user::Skill;
 use icondata as i;
 use leptos::*;
 use leptos_icons::*;
@@ -171,53 +171,6 @@ pub fn Skill(skills: ReadSignal<Vec<Skill>>) -> impl IntoView {
                 }).collect_view()
             }
 
-
-
-            // }
-
-
-
-            //   {skillsByCategory[activeCategory].map((skill, index) => (
-            //      <div key={index} class="flex flex-col items-center">
-            //         <div
-            //            class={`text-4xl mb-4 ${skill.color} cursor-pointer transform hover:scale-150 transition-all duration-300 ease-in-out`}>
-            //            <Link href={skill.url} target="_blank">
-            //               {skill.icon}
-            //            </Link>
-            //         </div>
-            //         <h4 class="text-xl font-semibold mb-2 text-gray-300 font-montserrat">
-            //            {skill.title}
-            //         </h4>
-            //         <div
-            //            class="w-full h-6 relative overflow-hidden rounded-xl bg-gray-700"
-            //            onMouseEnter={() => setHoveredSkillIndex(index)}
-            //            onMouseLeave={() => setHoveredSkillIndex(null)}>
-            //            <div
-            //               class={`w-full h-full absolute left-0 top-0 bg-gradient-to-r from-blue-600 via-blue-500 to-purple-600 ${
-            //                  styles["skill-bar"]
-            //               } ${
-            //                  hoveredSkillIndex === index
-            //                     ? styles["slide-in"]
-            //                     : ""
-            //               }`}
-            //               style={{
-            //                  clipPath:
-            //                     "polygon(0% 0%, 95% 0%, 100% 100%, 0% 100%)",
-            //                  transformOrigin: "left",
-            //                  width: `${skill.proficiencyLevel}%`,
-            //                  "--skill-width": `${skill.proficiencyLevel}%`,
-            //               }}
-            //            />
-            //            {hoveredSkillIndex === index && (
-            //               <div class="absolute inset-0 flex items-center justify-center">
-            //                  <span class="text-white text-sm font-semibold">
-            //                     {skill.proficiencyLevel}%
-            //                  </span>
-            //               </div>
-            //            )}
-            //         </div>
-            //      </div>
-            //   ))}
            </div>
         </div>
      </section>

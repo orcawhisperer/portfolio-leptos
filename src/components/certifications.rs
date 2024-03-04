@@ -1,4 +1,4 @@
-use crate::app::Certification;
+use crate::model::user::Certification;
 use leptos::*;
 
 #[component]

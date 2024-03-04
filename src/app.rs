@@ -5,67 +5,20 @@ use leptos::{
     server_fn::codec::{GetUrl, Json},
     *,
 };
+
+// use icondata as i;
+// use leptos_icons::*;
+
 use leptos_meta::*;
 use leptos_router::*;
-use serde::{Deserialize, Serialize};
 
-use crate::components::{
-    about::About, certifications::Certifications, contact::Contact, experience::Experience,
-    hero::Hero, navbar::NavBar, skill::Skill,
+use crate::{
+    components::{
+        about::About, certifications::Certifications, contact::Contact, experience::Experience,
+        hero::Hero, navbar::NavBar, skill::Skill,
+    },
+    model::user::{Certification, Contact, Experience, Skill, User},
 };
-
-#[derive(Serialize, Deserialize, Debug, Clone)]
-pub struct Position {
-    pub title: String,
-    pub duration: String,
-    pub responsibilities: Vec<String>,
-}
-
-#[derive(Serialize, Deserialize, Debug, Clone)]
-pub struct Experience {
-    pub company: String,
-    pub company_url: String,
-    pub logo: String,
-    pub location: String,
-    pub positions: Vec<Position>,
-}
-
-#[derive(Serialize, Deserialize, Debug, Clone)]
-pub struct Skill {
-    pub title: String,
-    pub category: String,
-    pub proficiency: String,
-    pub proficiency_level: u8,
-    pub color: String,
-    pub icon: String,
-    pub url: String,
-}
-
-#[derive(Serialize, Deserialize, Debug, Clone)]
-pub struct Certification {
-    pub title: String,
-    pub provider: String,
-    pub date: String,
-    pub link: String,
-    pub badge: String,
-}
-
-#[derive(Serialize, Deserialize, Debug, Clone)]
-pub struct Contact {
-    pub contact_type: String,
-    pub link: String,
-}
-
-#[derive(Serialize, Deserialize, Debug, Clone)]
-pub struct Data {
-    pub name: String,
-    pub title: String,
-    pub about: String,
-    pub skills: Vec<Skill>,
-    pub experience: Vec<Experience>,
-    pub certifications: Vec<Certification>,
-    pub contacts: Vec<Contact>,
-}
 
 /// Loads data from a JSON file
 #[server(
@@ -75,13 +28,19 @@ pub struct Data {
     input = GetUrl,
     output = Json
 )]
-pub async fn load_data() -> Result<Data, ServerFnError> {
+pub async fn load_data() -> Result<User, ServerFnError> {
     // TODO: Load from JSON
     logging::log!("loading data...");
     // print current working directory
 
-    let file = File::open("./data/data.json").unwrap();
-    let data: Data = serde_json::from_reader(file).unwrap();
+    let file = match File::open("./data/data.json") {
+        Ok(file) => file,
+        Err(error) => {
+            logging::log!("Error opening file: {}", error);
+            return Err(ServerFnError::ServerError(error.to_string()));
+        }
+    };
+    let data: User = serde_json::from_reader(file).unwrap();
     Ok(data)
 }
 
@@ -95,7 +54,6 @@ pub fn App() -> impl IntoView {
         // id=leptos means cargo-leptos will hot-reload this stylesheet
         <Stylesheet id="leptos" href="/pkg/portfolio.css"/>
 
-
         // sets the document title
         <Title text="Vasanth's Portfolio"/>
 
@@ -105,13 +63,13 @@ pub fn App() -> impl IntoView {
         <Meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <Meta property="og:title" content="Vasantha Kumar - Software Engineer"/>
         <Meta property="og:description" content="Software Engineer Portfolio website build with Rust using Leptos Framework and Tailwind CSS"/>
-        <Meta property="og:image" content="https://www.vasanthakumar.dev/assets/images/profile.jpg"/>
+        <Meta property="og:image" content="https://www.vasanthakumar.dev/assets/images/profile.webp"/>
         <Meta property="og:url" content="https://www.vasanthakumar.dev"/>
         <Meta property="og:type" content="website"/>
         <Meta name="twitter:card" content="summary_large_image"/>
         <Meta name="twitter:title" content="Vasantha Kumar - Software Engineer"/>
         <Meta name="twitter:description" content="Software Engineer Portfolio website build with Rust using Leptos Framework and Tailwind CSS"/>
-        <Meta name="twitter:image" content="https://www.vasanthakumar.dev/assets/images/profile.jpg"/>
+        <Meta name="twitter:image" content="https://www.vasanthakumar.dev/assets/images/profile.webp"/>
 
 
         // content for this welcome page
@@ -119,28 +77,22 @@ pub fn App() -> impl IntoView {
             <NavBar/>
             <main>
                 <Routes>
-                    <Route path="" view=HomePage/>
+                    <Route path="" view=Home/>
                     <Route path="/*any" view=NotFound/>
                 </Routes>
             </main>
+            // <footer class="fixed p-4 bg-gradient-to-r from-gray-800 via-gray-900 to-black flex flex-col justify-center items-center">
+            //    <Icon icon={i::AiHeartFilled} class="text-red-500 text-center hover:scale-150 animate-pulse cursor-pointer" />
+            // </footer>
         </Router>
     }
 }
 
 /// Renders the home page of your application.
 #[component]
-fn HomePage() -> impl IntoView {
+fn Home() -> impl IntoView {
     let (data_loaded, set_data_loaded) = create_signal(false);
-    let (data, set_data) = create_signal(Data {
-        name: "".to_string(),
-        title: "".to_string(),
-        about: "".to_string(),
-        skills: vec![],
-        experience: vec![],
-        certifications: vec![],
-        contacts: vec![],
-    });
-
+    let (data, set_data) = create_signal(User::new());
     let (name, set_name) = create_signal(data().name);
     let (title, set_title) = create_signal(data().title);
     let (about, set_about) = create_signal(data().about.clone());
@@ -149,53 +101,42 @@ fn HomePage() -> impl IntoView {
     let (certs, set_certs) = create_signal(data().certifications.clone());
     let (contacts, set_contacts) = create_signal(data().contacts.clone());
 
-    // let once = create_resource(
-    //     || (),
-    //     |_| async move {
-    //         logging::log!("Resource loading");
-    //         let data_result = load_data().await;
-    //         match data_result {
-    //             Ok(data) => Some(data),
-    //             Err(e) => None,
-    //         }
-    //     },
-    // );
+    create_local_resource(
+        || (),
+        move |_| async move {
+            logging::log!("Resource loading");
+            let data_result = load_data().await;
+            if let Ok(data) = data_result {
+                logging::log!("Data loaded {}", data.about.clone());
+                set_data.update(|user_data: &mut User| *user_data = data.clone());
+                set_data_loaded.update(|data_loaded: &mut bool| *data_loaded = true);
+                set_name.update(|name: &mut String| *name = data.name.clone());
+                set_title.update(|title: &mut String| *title = data.title.clone());
+                set_about.update(|about: &mut String| *about = data.about.clone());
+                set_exp.update(|exp: &mut Vec<Experience>| *exp = data.experience.clone());
+                set_skills.update(|skills: &mut Vec<Skill>| *skills = data.skills.clone());
+                set_certs
+                    .update(|certs: &mut Vec<Certification>| *certs = data.certifications.clone());
+                set_contacts
+                    .update(|contacts: &mut Vec<Contact>| *contacts = data.contacts.clone());
+            } else {
+                set_data_loaded.update(|data_loaded: &mut bool| *data_loaded = false);
+                logging::log!("Error loading data");
+            }
+        },
+    );
 
     create_effect(move |_| {
         logging::log!("Data loaded: {}", data_loaded());
-
-        spawn_local(async move {
-            logging::log!("Loading data...");
-            // only load the data once on initial render
-            if !data_loaded() {
-                let data_result = load_data().await;
-                if let Ok(data) = data_result {
-                    set_data.update(|user_data: &mut Data| *user_data = data.clone());
-                    set_data_loaded.update(|data_loaded: &mut bool| *data_loaded = true);
-                    set_name.update(|name: &mut String| *name = data.name.clone());
-                    set_title.update(|title: &mut String| *title = data.title.clone());
-                    set_about.update(|about: &mut String| *about = data.about.clone());
-                    set_exp.update(|exp: &mut Vec<Experience>| *exp = data.experience.clone());
-                    set_skills.update(|skills: &mut Vec<Skill>| *skills = data.skills.clone());
-                    set_certs.update(|certs: &mut Vec<Certification>| {
-                        *certs = data.certifications.clone()
-                    });
-                    set_contacts
-                        .update(|contacts: &mut Vec<Contact>| *contacts = data.contacts.clone());
-                }
-            }
-        })
     });
 
     view! {
-        <main>
-            <Hero name=name title=title />
-            <About about_me_text=about/>
-            <Experience experiences=exp/>
-            <Skill skills=skills/>
-            <Certifications certs=certs/>
-            <Contact contacts=contacts/>
-        </main>
+        <Hero name=name title=title/>
+        <About about_me_text=about/>
+        <Experience experiences=exp/>
+        <Skill skills=skills/>
+        <Certifications certs=certs/>
+        <Contact contacts=contacts/>
     }
 }
 
@@ -217,6 +158,8 @@ fn NotFound() -> impl IntoView {
     }
 
     view! {
-        <h1>"Not Found"</h1>
+        <main class="w-full h-screen flex flex-col justify-center items-center text-white text-4xl bg-gradient-to-r from-gray-800 via-gray-900 to-black">
+            <p class="font-bold font-montserrat uppercase ">{"404 - Not Found"}</p>
+        </main>
     }
 }
