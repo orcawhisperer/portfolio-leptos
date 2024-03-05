@@ -74,7 +74,7 @@ pub fn App() -> impl IntoView {
 
         // content for this welcome page
         <Router>
-            <NavBar/>
+            //<NavBar/>
             <main>
                 <Routes>
                     <Route path="" view=Home/>
@@ -131,6 +131,7 @@ fn Home() -> impl IntoView {
     });
 
     view! {
+        <NavBar />
         <Hero name=name title=title/>
         <About about_me_text=about/>
         <Experience experiences=exp/>

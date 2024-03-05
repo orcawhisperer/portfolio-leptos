@@ -1,35 +1,46 @@
 use leptos::*;
+use wasm_bindgen::UnwrapThrowExt;
 
 #[component]
 pub fn Terminal(about_me_text: String) -> impl IntoView {
-    // let (typed, set_typed) = create_signal(String::new());
-    // let (current_index, set_current_index) = create_signal(0);
+    let (typed, set_typed) = create_signal(String::new());
+    let (current_index, set_current_index) = create_signal(0);
+    let typing_speed = 35;
+    let about = about_me_text.clone();
 
-    // create_effect(move |_| {
-    //     let about = about_me_text.clone();
-    //     let current_index = current_index.clone().get();
+    let isTyped = move || (typed().len() == about.clone().len());
 
-    //     spawn_local(async move {
-    //         if current_index < about.len() {
-    //             logging::log!(
-    //                 "current_index = {},  typed = {}",
-    //                 current_index.clone(),
-    //                 typed().clone()
-    //             );
-    //             let current_char = about.chars().nth(current_index).unwrap_or(' ');
-    //             set_typed.update(|typed: &mut String| typed.push(current_char));
-    //             set_current_index.update(|current_index: &mut usize| *current_index += 1);
-    //             tokio::time::sleep(std::time::Duration::from_millis(1000)).await;
-    //         }
-    //     })
-    // });
+    create_effect(move |_| {
+        let about = about_me_text.clone();
+        let set_typed = set_typed.clone();
+        let set_current_index = set_current_index.clone();
+        let current_index = current_index.clone();
+
+        let interval_handle = set_interval_with_handle(
+            move || {
+                let text = about.clone();
+                let index = current_index.get();
+                if index <= text.len() as i32 {
+                    set_typed(text[..index as usize].to_string());
+                    set_current_index(index + 1);
+                }
+            },
+            core::time::Duration::from_millis(typing_speed),
+        )
+        .unwrap_throw();
+
+        on_cleanup(move || {
+            interval_handle.clear();
+        });
+    });
 
     view! {
         <div class="terminal scroll-smooth bg-black p-6 rounded-md shadow-lg overflow-y-auto flex flex-col h-96 terminal">
             <p class="text-md text-green-500 leading-relaxed md:text-xl lg:text-lg p-2 font-mono">
-                {move || about_me_text.clone()}
-                // <span class="cursor-blink"> | </span>
+                {typed.clone()} <Show when=move ||  !isTyped()> <span class="cursor-blink">|</span> </Show>
             </p>
+            // <Show when=isTyped.clone()> <input type="text" autofocus="true"></input> </Show>
+
         </div>
     }
 }
