@@ -27,7 +27,7 @@ pub fn About(about_me_text: ReadSignal<String>) -> impl IntoView {
                </Show>
 
                <Show when=move || !show_terminal.get()>
-                  <p class="text-md text-white leading-relaxed md:text-xl lg:text-lg p-2 font-montserrat">
+                  <p class="text-md text-white leading-relaxed md:text-xl lg:text-lg p-2 font-mono">
                      {about_me_text().clone()}
                   </p>
               </Show>
