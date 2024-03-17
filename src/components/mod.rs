@@ -6,3 +6,4 @@ pub mod hero;
 pub mod navbar;
 pub mod skill;
 pub mod terminal;
+pub mod typing_effect;

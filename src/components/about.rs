@@ -1,14 +1,30 @@
-use crate::components::terminal::Terminal;
+use crate::{components::terminal::Terminal, state::terminal::TerminalState};
 use icondata as i;
 use leptos::*;
 use leptos_icons::*;
 
 #[component]
 pub fn About(about_me_text: ReadSignal<String>) -> impl IntoView {
-    let (show_terminal, set_show_terminal) = create_signal(true);
+    let terminal_state: RwSignal<TerminalState<'_>> = expect_context::<RwSignal<TerminalState>>();
+
+    let (terminal_show_count, set_terminal_show_count) = create_slice(
+        terminal_state,
+        |termina_state| termina_state.terminal_show_count,
+        |terminal_state, count| terminal_state.terminal_show_count = count,
+    );
+
+    let (show_term, set_show_term) = create_slice(
+        terminal_state,
+        |termina_state| termina_state.show_terminal,
+        |terminal_state, show_term| terminal_state.show_terminal = show_term,
+    );
 
     create_effect(move |_| {
-        logging::log!("show_terminal = {}", show_terminal());
+        logging::log!(
+            "show_terminal = {}, terminal_show_count = {}",
+            show_term(),
+            terminal_show_count()
+        );
         //   logging::log!("about_me_text =  {}", about_me_text.get());
     });
 
@@ -22,18 +38,24 @@ pub fn About(about_me_text: ReadSignal<String>) -> impl IntoView {
               <div>
 
 
-               <Show when=move || show_terminal.get()>
+               <Show when=move || show_term.get()>
                    <Terminal about_me_text={about_me_text().clone()} />
                </Show>
 
-               <Show when=move || !show_terminal.get()>
+               <Show when=move || !show_term.get()>
                   <p class="text-md text-white leading-relaxed md:text-xl lg:text-lg p-2 font-mono">
                      {about_me_text().clone()}
                   </p>
               </Show>
 
                  <ul class="mt-4 text-white flex flex-wrap gap-4">
-                    <li class="flex items-center justify-center w-12 rounded-full cursor-pointer" on:click=move |_| set_show_terminal.update(|show_terminal: &mut bool| *show_terminal = !*show_terminal)>
+                    <li class="flex items-center justify-center w-12 rounded-full cursor-pointer" on:click=move |_| {
+                     // set_show_terminal.update(|show_terminal: &mut bool| *show_terminal = !*show_terminal)
+                     set_show_term(!show_term());
+                     if !show_term() {
+                        set_terminal_show_count(terminal_show_count() + 1);
+                     }
+                    }>
                         <Icon
                         class="animate-pulse hover:animate-none text-green-500 hover:text-green-400 hover:scale-110 transition duration-300 ease-in-out" icon=i::BsTerminal width="25" height="25" />
                     </li>

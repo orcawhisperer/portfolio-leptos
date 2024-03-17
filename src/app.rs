@@ -18,6 +18,7 @@ use crate::{
         hero::Hero, navbar::NavBar, skill::Skill,
     },
     model::user::{Certification, Contact, Experience, Skill, User},
+    state::terminal::TerminalState,
 };
 
 /// Loads data from a JSON file
@@ -49,6 +50,8 @@ pub fn App() -> impl IntoView {
     // Provides context that manages stylesheets, titles, meta tags, etc.
     provide_meta_context();
 
+    provide_context(create_rw_signal(TerminalState::new()));
+
     view! {
         // injects a stylesheet into the document <head>
         // id=leptos means cargo-leptos will hot-reload this stylesheet
@@ -56,7 +59,7 @@ pub fn App() -> impl IntoView {
 
         // sets the document title
         <Title text="Vasanth's Portfolio"/>
-
+        <Meta name="charset" content="utf-8"/>
         <Meta name="description" content="Software Engineer Portfolio website build with Rust using Leptos Framework and Tailwind CSS"/>
         <Meta name="keywords" content="software engineer, programming, python, go, javascript, web development, devops, linux, computer science, rust, leptos, portfolio"/>
         <Meta name="author" content="Vasantha Kumar"/>
