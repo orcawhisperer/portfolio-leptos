@@ -18,6 +18,7 @@ use crate::{
         hero::Hero, navbar::NavBar, skill::Skill,
     },
     model::user::{Certification, Contact, Experience, Skill, User},
+    state::terminal::TerminalState,
 };
 
 /// Loads data from a JSON file
@@ -48,6 +49,8 @@ pub async fn load_data() -> Result<User, ServerFnError> {
 pub fn App() -> impl IntoView {
     // Provides context that manages stylesheets, titles, meta tags, etc.
     provide_meta_context();
+
+    provide_context(create_rw_signal(TerminalState::new()));
 
     view! {
         // injects a stylesheet into the document <head>
