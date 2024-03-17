@@ -5,7 +5,6 @@ use leptos_icons::*;
 
 #[component]
 pub fn About(about_me_text: ReadSignal<String>) -> impl IntoView {
-    let (show_terminal, set_show_terminal) = create_signal(true);
     let terminal_state: RwSignal<TerminalState<'_>> = expect_context::<RwSignal<TerminalState>>();
 
     let (terminal_show_count, set_terminal_show_count) = create_slice(

@@ -3,9 +3,9 @@ service: default # If you're deploying the 'default' service
 env: flex # Since you're likely using Cloud Build, the flexible environment is better suited
 
 # Optional (but good practice):
-instance_class: F2 # A basic instance class, adjust as needed
+instance_class: F1 # A basic instance class, adjust as needed
 automatic_scaling: # Example scaling configuration
    min_num_instances: 1
-   max_num_instances: 5
+   max_num_instances: 2
    cpu_utilization:
       target_utilization: 0.7

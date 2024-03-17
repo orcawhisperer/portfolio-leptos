@@ -59,7 +59,7 @@ pub fn App() -> impl IntoView {
 
         // sets the document title
         <Title text="Vasanth's Portfolio"/>
-
+        <Meta name="charset" content="utf-8"/>
         <Meta name="description" content="Software Engineer Portfolio website build with Rust using Leptos Framework and Tailwind CSS"/>
         <Meta name="keywords" content="software engineer, programming, python, go, javascript, web development, devops, linux, computer science, rust, leptos, portfolio"/>
         <Meta name="author" content="Vasantha Kumar"/>

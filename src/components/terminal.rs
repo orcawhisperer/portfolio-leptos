@@ -3,13 +3,12 @@ use crate::{
     state::terminal::{History, TerminalState},
 };
 use leptos::*;
-use tracing::event;
 
 #[component]
 pub fn Terminal(about_me_text: String) -> impl IntoView {
     let terminal_state: RwSignal<TerminalState<'_>> = expect_context::<RwSignal<TerminalState>>();
     let (input_value, set_input_value) = create_signal(String::new());
-    let (command_history_idx, set_command_history_idx) = create_signal(-1 as i32);
+    let (_command_history_idx, set_command_history_idx) = create_signal(-1 as i32);
 
     let (history, set_history) = create_slice(
         terminal_state,
@@ -29,7 +28,13 @@ pub fn Terminal(about_me_text: String) -> impl IntoView {
         |terminal_state, count| terminal_state.terminal_show_count = count,
     );
 
-    let prank_commands = [
+    let (show_term, set_show_term) = create_slice(
+        terminal_state,
+        |termina_state| termina_state.show_terminal,
+        |terminal_state, show_term| terminal_state.show_terminal = show_term,
+    );
+
+    let _prank_commands = [
         History::new("Executing hack...", "Accessing target system..."),
         History::new("Bypassing firewall...", "Firewall bypassed successfully..."),
         History::new(
@@ -94,7 +99,17 @@ pub fn Terminal(about_me_text: String) -> impl IntoView {
                            <span class="text-green-400">{h.command.to_string()}</span>
                         </div>
                         <div class="text-sm leading-relaxed font-mono">
-                           <TypingEffect input_text={h.result.to_string()} />
+                           {
+                            if idx == history.len() - 1 {
+                                view! {
+                                    <TypingEffect input_text={h.result.to_string()} />
+                                }.into_view()
+                            } else {
+                                view! {
+                                    <span class="text-green-400">{h.result.to_string()}</span>
+                                }.into_view()
+                            }
+                           }
                         </div>
                      </div>
                 }
@@ -104,37 +119,49 @@ pub fn Terminal(about_me_text: String) -> impl IntoView {
 
     let process_command = move |cmd: String| {
         let mut result = "";
-        let input_val = input_value.clone();
-        let input_cmd = cmd.to_lowercase();
+        // let input_val = input_value.clone();
+        let input_cmd = cmd.clone().to_lowercase();
+
         match input_cmd.as_str() {
             "help" | "?" | "h" => result = "try: whoami, contact, skills, exp, cert, clear, exit",
-            "hi" | "hello" => {
-                let mut his = history().clone();
-                for cmd in prank_commands {
-                    let h = History::new(cmd.command, cmd.result);
-                    his.push(h);
-                    set_history(his);
-                }
+            "hi" | "hello" => result = "Hey there! :)",
+            "whoami" => result = "guest",
+            "exp" => result = "Engineer@Google [2022 - Present]",
+            "skills" => result = "I can juggle with bits and bytes!",
+            "contact" => result =
+                "Send a pigeon to the nearest tree or drop me a mail me at kvasanth373@gmail.com",
+            "cert" => result = "Certified Binary Whisperer!!",
+            "clear" => {
+                set_input_value("".to_string());
+                set_history(Vec::new());
+                set_command_history_idx(-1);
+            }
+            "exit" => {
+                set_input_value("".to_string());
+                set_history(Vec::new());
+                set_show_term(!show_term());
             }
             _ => {
-                result = "Invalid Command!";
+                result = "Invalid Command! Try 'help or h or ?'";
                 // set_input_value("Invalid Command!".to_string());
             }
         }
         let mut his = history().clone();
 
         if result.len() > 0 {
-            let h = History::new("asada", result);
+            let h = History::new("", result);
             his.push(h);
             // his.push(History::new(&input_val, result));
             set_history(his);
+            set_input_value("".to_string());
+            // set_command_history_idx(-1);
         }
     };
 
     let process_key_down = move |event: String| {
         let input_value = input_value.clone().get(); // Access the value within the RwSignal
-        let history = history.clone().get();
-        let command_history_idx = command_history_idx.clone().get();
+                                                     // let history = history.clone().get();
+                                                     // let command_history_idx = command_history_idx.clone().get();
 
         match event.as_str() {
             "Enter" => {
@@ -143,32 +170,32 @@ pub fn Terminal(about_me_text: String) -> impl IntoView {
             }
             "ArrowUp" => {
                 logging::log!("Upward Arrow is pressed");
-                if history.len() > 2 {
-                    set_command_history_idx(command_history_idx + 1);
-                    set_input_value(
-                        history[(history.len() as i32 - command_history_idx - 2) as usize]
-                            .command
-                            .to_string(),
-                    );
-                }
+                // if history.len() > 2 {
+                //     set_command_history_idx(command_history_idx + 1);
+                //     set_input_value(
+                //         history[(history.len() as i32 - command_history_idx - 2) as usize]
+                //             .command
+                //             .to_string(),
+                //     );
+                // }
             }
             "ArrowDown" => {
                 logging::log!("Downward Arrow is pressed");
-                if command_history_idx > 0 {
-                    set_command_history_idx(command_history_idx - 1);
-                    set_input_value(
-                        history[(history.len() as i32 - command_history_idx) as usize]
-                            .command
-                            .to_string(),
-                    );
-                } else if command_history_idx == 0 {
-                    set_command_history_idx(-1);
-                    set_input_value("".to_string());
-                }
+                // if command_history_idx > 0 {
+                //     set_command_history_idx(command_history_idx - 1);
+                //     set_input_value(
+                //         history[(history.len() as i32 - command_history_idx) as usize]
+                //             .command
+                //             .to_string(),
+                //     );
+                // } else if command_history_idx == 0 {
+                //     set_command_history_idx(-1);
+                //     set_input_value("".to_string());
+                // }
             }
             _ => {}
         };
-    }
+    };
 
     fn handle_up_arrow() {}
 
