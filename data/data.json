@@ -1,7 +1,7 @@
 {
    "name": "VASANTHAKUMAR",
    "title": "SOFTWARE ENGINEER | CLOUD ARCHITECT | TECH ENTHUSIAST",
-   "about": "Hi, I'm an experienced software engineer skilled in various programming langauges and technologies like Python, Go, Rust, gRPC JavaScript, Web Application Development, DevOps, Cloud and Linux. I have Bachelors Degree in Computer Science Engineering. Interested in working on Revolutionary technologies and solving real-world problems through technology...",
+   "about": "Hi, I'm a Full-Stack Software Engineer with 5+ years of experience building and deploying scalable web applications using Python, Go, Rust, and JavaScript frameworks. Adept at DevOps practices for seamless CI/CD pipelines and Linux administration. Passionate about tackling real-world challenges through innovative software solutions.",
    "experience": [
       {
          "company": "Google",
@@ -13,9 +13,9 @@
                "title": "Cloud Engineer, Full Stack",
                "duration": "December 2022 - Present",
                "responsibilities": [
+                  "Design, develop, test, deploy, maintain, and improve software.",
                   "Developing technologies to accelerate the Google Cloud journey from legacy monolithic applications. Bring fresh ideas from all areas, including testing and validation automation while maintaining the production availability, conversion automation, distributed computing, and large-scale system design.",
-                  "Work with Google Cloud Platform strategic partners to accelerate the delivery.",
-                  "Design, develop, test, deploy, maintain, and improve software."
+                  "Work with Google Cloud Platform strategic partners to accelerate the delivery."
                ]
             },
             {

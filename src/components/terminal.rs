@@ -72,8 +72,8 @@ pub fn Terminal(about_me_text: String) -> impl IntoView {
     ];
 
     create_effect(move |_| {
-        logging::log!("history: {:?}", terminal_state().history);
-        logging::log!("input_value: {}", input_value());
+        // logging::log!("history: {:?}", terminal_state().history);
+        // logging::log!("input_value: {}", input_value());
         // let h = History::new("ls", "asa");
         // let i = History::new("cat", "asdaasdsadasdas");
         // let j = History::new("ping", "pong!");
